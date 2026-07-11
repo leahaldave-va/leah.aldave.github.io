@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leah Aldave — Remote Customer Support Specialist & Virtual Assistant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEF0EA;
+    --card:#FBFBF8;
+    --ink:#1E2A22;
+    --ink-soft:#57685D;
+    --ink-faint:#8A9587;
+    --line:#D7D9CB;
+    --teal:#2E6F63;
+    --teal-dark:#1B443C;
+    --amber:#B4813B;
+    --dot:#3C9A6E;
+    --shadow: 0 1px 0 rgba(30,42,34,0.04), 0 8px 24px -12px rgba(30,42,34,0.18);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+  }
+  ::selection{background:var(--teal); color:#fff;}
+
+  .wrap{max-width:1040px; margin:0 auto; padding:0 28px;}
+
+  a{color:inherit;}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(238,240,234,0.88);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:64px;
+  }
+  .brand{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700; font-size:16px; letter-spacing:0.01em;
+    display:flex; align-items:center; gap:8px;
+  }
+  .brand .mark{
+    width:9px; height:9px; border-radius:2px;
+    background:var(--teal); display:inline-block;
+    transform:rotate(45deg);
+  }
+  .navlinks{display:flex; gap:28px; font-family:'IBM Plex Mono', monospace; font-size:12.5px; text-transform:uppercase; letter-spacing:0.06em;}
+  .navlinks a{text-decoration:none; color:var(--ink-soft); transition:color .15s;}
+  .navlinks a:hover{color:var(--teal-dark);}
+  .navlinks a:focus-visible, a:focus-visible, button:focus-visible{outline:2px solid var(--teal); outline-offset:2px;}
+  @media (max-width:640px){.navlinks{display:none;}}
+
+  /* ---------- HERO / TICKET CARD ---------- */
+  header.hero{padding:56px 0 40px;}
+  .ticket{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+  }
+  .ticket-bar{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 22px;
+    border-bottom:1px dashed var(--line);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    flex-wrap:wrap; gap:10px;
+  }
+  .ticket-id{letter-spacing:0.04em;}
+  .status-pill{
+    display:inline-flex; align-items:center; gap:7px;
+    padding:5px 12px; border-radius:100px;
+    background:rgba(46,111,99,0.09);
+    color:var(--teal-dark);
+    font-weight:600;
+  }
+  .status-pill .dot{
+    width:7px; height:7px; border-radius:50%; background:var(--dot);
+    box-shadow:0 0 0 3px rgba(60,154,110,0.18);
+  }
+  .ticket-body{padding:36px 22px 30px;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:12px;
+    text-transform:uppercase; letter-spacing:0.09em;
+    color:var(--amber); margin:0 0 14px;
+  }
+  h1{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:clamp(32px, 5vw, 50px);
+    line-height:1.05;
+    margin:0 0 10px;
+    letter-spacing:-0.01em;
+  }
+  .role{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:500; font-size:clamp(16px,2.2vw,20px);
+    color:var(--teal-dark);
+    margin:0 0 26px;
+  }
+  .fields{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(190px,1fr));
+    gap:1px; background:var(--line);
+    border:1px solid var(--line); border-radius:10px; overflow:hidden;
+    margin-bottom:28px;
+  }
+  .field{background:var(--card); padding:14px 16px;}
+  .field .k{
+    font-family:'IBM Plex Mono', monospace; font-size:10.5px;
+    text-transform:uppercase; letter-spacing:0.08em; color:var(--ink-faint);
+    margin-bottom:4px;
+  }
+  .field .v{font-size:14.5px; font-weight:500;}
+  .summary{max-width:640px; color:var(--ink-soft); font-size:15.5px; margin-bottom:28px;}
+  .cta-row{display:flex; gap:12px; flex-wrap:wrap;}
+  .btn{
+    font-family:'IBM Plex Mono', monospace; font-size:13px;
+    text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+    padding:12px 20px; border-radius:8px; font-weight:600;
+    letter-spacing:0.02em; transition:transform .15s, box-shadow .15s;
+    border:1px solid transparent; cursor:pointer;
+  }
+  .btn-primary{background:var(--teal); color:#fff;}
+  .btn-primary:hover{transform:translateY(-1px); box-shadow:0 6px 16px -6px rgba(46,111,99,0.55);}
+  .btn-ghost{background:transparent; border-color:var(--line); color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--teal); color:var(--teal-dark);}
+
+  /* ---------- TIMEZONE BRIDGE ---------- */
+  .bridge{
+    margin-top:18px; padding-top:22px; border-top:1px dashed var(--line);
+  }
+  .bridge-label{
+    font-family:'IBM Plex Mono', monospace; font-size:11.5px;
+    text-transform:uppercase; letter-spacing:0.08em; color:var(--ink-faint);
+    margin-bottom:12px;
+  }
+  .clocks{display:flex; gap:18px; flex-wrap:wrap;}
+  .clock{
+    flex:1; min-width:180px;
+    background:linear-gradient(180deg, rgba(46,111,99,0.05), transparent);
+    border:1px solid var(--line); border-radius:10px; padding:14px 16px;
+  }
+  .clock .place{font-size:13px; font-weight:600; margin-bottom:2px;}
+  .clock .time{font-family:'IBM Plex Mono', monospace; font-size:22px; font-weight:600; color:var(--teal-dark);}
+  .clock .sub{font-size:11.5px; color:var(--ink-faint);}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:64px 0;}
+  .sec-head{margin-bottom:32px;}
+  .sec-eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:12px;
+    text-transform:uppercase; letter-spacing:0.09em; color:var(--amber);
+    margin:0 0 8px;
+  }
+  h2{
+    font-family:'Space Grotesk', sans-serif; font-weight:700;
+    font-size:clamp(22px,3vw,30px); margin:0;
+  }
+  .sec-note{color:var(--ink-soft); font-size:14.5px; margin-top:8px; max-width:560px;}
+
+  /* Queues */
+  .queues{display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:18px;}
+  .queue{
+    background:var(--card); border:1px solid var(--line); border-radius:12px;
+    padding:22px 20px; box-shadow:var(--shadow);
+  }
+  .queue-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;}
+  .queue-title{font-family:'Space Grotesk', sans-serif; font-weight:600; font-size:15.5px;}
+  .queue-count{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--ink-faint);
+    border:1px solid var(--line); padding:2px 8px; border-radius:100px;
+  }
+  .chips{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{
+    font-size:13px; padding:6px 11px; border-radius:7px;
+    background:rgba(46,111,99,0.07); color:var(--teal-dark);
+    border:1px solid rgba(46,111,99,0.15);
+  }
+
+  /* Tools */
+  .tools-wrap{margin-top:44px;}
+  .tools-title{
+    font-family:'IBM Plex Mono', monospace; font-size:11.5px; text-transform:uppercase;
+    letter-spacing:0.08em; color:var(--ink-faint); margin-bottom:14px;
+  }
+  .tools{display:flex; flex-wrap:wrap; gap:9px;}
+  .tool{
+    font-size:13px; padding:7px 13px; border-radius:100px;
+    border:1px solid var(--line); background:var(--card); color:var(--ink-soft);
+  }
+
+  /* Experience log */
+  .log{border-left:1px solid var(--line); margin-left:6px;}
+  .entry{position:relative; padding:0 0 34px 28px;}
+  .entry:last-child{padding-bottom:0;}
+  .entry::before{
+    content:''; position:absolute; left:-5px; top:4px;
+    width:9px; height:9px; border-radius:50%;
+    background:var(--card); border:2px solid var(--teal);
+  }
+  .entry-top{
+    display:flex; flex-wrap:wrap; align-items:baseline; gap:10px 14px; margin-bottom:6px;
+  }
+  .entry-date{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--teal-dark);
+    background:rgba(46,111,99,0.08); padding:3px 9px; border-radius:5px;
+  }
+  .entry-role{font-family:'Space Grotesk', sans-serif; font-weight:600; font-size:16.5px;}
+  .entry-org{color:var(--ink-soft); font-size:14px;}
+  details{margin-top:6px;}
+  summary{
+    cursor:pointer; font-family:'IBM Plex Mono', monospace; font-size:12px;
+    color:var(--teal-dark); list-style:none; display:inline-flex; align-items:center; gap:6px;
+    padding:2px 0; user-select:none;
+  }
+  summary::-webkit-details-marker{display:none;}
+  summary::before{content:'▸'; font-size:10px; transition:transform .15s;}
+  details[open] summary::before{transform:rotate(90deg);}
+  .entry ul{margin:12px 0 0; padding-left:18px; color:var(--ink-soft); font-size:14.5px;}
+  .entry ul li{margin-bottom:7px;}
+
+  .early{
+    margin-top:8px; padding:18px 20px; border:1px dashed var(--line); border-radius:10px;
+    font-size:13.5px; color:var(--ink-soft); background:var(--card);
+  }
+  .early .early-title{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; text-transform:uppercase;
+    letter-spacing:0.08em; color:var(--ink-faint); margin-bottom:8px;
+  }
+  .early ul{margin:0; padding-left:18px;}
+  .early li{margin-bottom:4px;}
+
+  /* Education */
+  .edu-card{
+    display:flex; gap:18px; align-items:flex-start;
+    background:var(--card); border:1px solid var(--line); border-radius:12px;
+    padding:20px 22px; box-shadow:var(--shadow);
+  }
+  .edu-icon{
+    width:38px; height:38px; border-radius:9px; flex-shrink:0;
+    background:rgba(180,129,59,0.14); color:var(--amber);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:14px;
+  }
+  .edu-degree{font-weight:600; font-size:15px;}
+  .edu-school{color:var(--ink-soft); font-size:14px; margin-top:2px;}
+
+  /* Note from Leah */
+  .note-card{
+    position:relative;
+    background:var(--card); border:1px solid var(--line); border-radius:14px;
+    padding:36px 40px; box-shadow:var(--shadow);
+    max-width:760px;
+  }
+  .note-mark{
+    font-family:'Space Grotesk', sans-serif; font-size:52px; font-weight:700;
+    color:var(--teal); opacity:0.35; line-height:1; margin-bottom:6px;
+  }
+  .note-card p{
+    font-size:16.5px; line-height:1.65; color:var(--ink); margin:0 0 16px;
+  }
+  .note-card p:last-of-type{margin-bottom:0;}
+  .note-sign{
+    margin-top:20px; display:flex; align-items:center; gap:10px;
+    font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:var(--ink-soft);
+  }
+  .note-sign .sig{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:16px; color:var(--teal-dark);}
+
+  /* Footer / contact */
+  footer{
+    background:var(--teal-dark); color:#EDF3F0; padding:60px 0 40px; margin-top:20px;
+  }
+  footer .wrap{display:flex; flex-wrap:wrap; gap:40px; justify-content:space-between; align-items:flex-start;}
+  footer h2{color:#fff;}
+  footer .sec-eyebrow{color:#9AC9BC;}
+  footer .sec-note{color:#BFDAD2;}
+  .foot-cta{display:flex; flex-direction:column; gap:14px; min-width:240px;}
+  .foot-field{font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:#9AC9BC;}
+  .foot-field b{color:#fff; font-weight:600; display:block; font-size:14px; margin-top:2px;}
+  .foot-bottom{
+    margin-top:44px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.12);
+    font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:#7FA79B;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+  }
+
+  @media (max-width:600px){
+    .ticket-body{padding:28px 18px 24px;}
+    section{padding:48px 0;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><span class="mark"></span> LEAH ALDAVE</div>
+    <div class="navlinks">
+      <a href="#overview">Overview</a>
+      <a href="#queues">Skills</a>
+      <a href="#log">Experience</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="overview">
+  <div class="wrap">
+    <div class="ticket">
+      <div class="ticket-bar">
+        <span class="ticket-id">TICKET #VA-2026 · OPENED BY PROSPECTIVE CLIENT</span>
+        <span class="status-pill"><span class="dot"></span> AVAILABLE FOR NEW WORK</span>
+      </div>
+      <div class="ticket-body">
+        <p class="eyebrow">Assigned Agent</p>
+        <h1>Ma. Leah Czarina C. Aldave</h1>
+        <p class="role">Remote Customer Support Specialist &amp; Virtual Assistant</p>
+
+        <div class="fields">
+          <div class="field"><div class="k">Based In</div><div class="v">Philippines (UTC+08:00)</div></div>
+          <div class="field"><div class="k">Works</div><div class="v">Pacific Time hours</div></div>
+          <div class="field"><div class="k">Experience</div><div class="v">6+ years, fully remote</div></div>
+          <div class="field"><div class="k">Contact</div><div class="v">leah.aldave.va@gmail.com</div></div>
+        </div>
+
+        <p class="summary">Hi, I'm Leah! For the past six years I've worked fully remote, helping teams keep their customers taken care of — troubleshooting issues, moderating communities, and making sure nothing falls through the cracks. Before that, I spent over a decade in research and operations, so digging up information and keeping things organized comes naturally to me. I lean on tools like ChatGPT, Gemini, and Perplexity to move faster, but I always check the details myself before anything reaches you.</p>
+
+        <div class="cta-row">
+          <a class="btn btn-primary" href="mailto:leah.aldave.va@gmail.com">Email Leah →</a>
+          <a class="btn btn-ghost" href="#log">See work history</a>
+        </div>
+
+        <div class="bridge">
+          <div class="bridge-label">Live — where the workday overlaps</div>
+          <div class="clocks">
+            <div class="clock">
+              <div class="place">Manila, Philippines</div>
+              <div class="time" id="clock-ph">--:--:--</div>
+              <div class="sub">Leah's local time</div>
+            </div>
+            <div class="clock">
+              <div class="place">Pacific Time (US)</div>
+              <div class="time" id="clock-pt">--:--:--</div>
+              <div class="sub">Client's working hours</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="queues">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="sec-eyebrow">Core Skills</p>
+      <h2>Three queues, one point of contact</h2>
+      <p class="sec-note">Support, admin, and research work rarely arrive in neat separate lanes — Leah's background covers all three, so nothing needs to be handed off.</p>
+    </div>
+    <div class="queues">
+      <div class="queue">
+        <div class="queue-head"><span class="queue-title">Support Queue</span><span class="queue-count">Current focus</span></div>
+        <div class="chips">
+          <span class="chip">Multi-channel support (Zendesk, Discord)</span>
+          <span class="chip">Ticket lifecycle management</span>
+          <span class="chip">Technical troubleshooting</span>
+          <span class="chip">Knowledge base management</span>
+          <span class="chip">Community moderation</span>
+        </div>
+      </div>
+      <div class="queue">
+        <div class="queue-head"><span class="queue-title">Admin &amp; Project Queue</span><span class="queue-count">Ops &amp; VA work</span></div>
+        <div class="chips">
+          <span class="chip">Task tracking</span>
+          <span class="chip">Documentation management</span>
+          <span class="chip">Board meeting minutes</span>
+          <span class="chip">Operational reporting</span>
+          <span class="chip">Project &amp; travel/venue coordination</span>
+        </div>
+      </div>
+      <div class="queue">
+        <div class="queue-head"><span class="queue-title">Research &amp; Analysis Queue</span><span class="queue-count">Background strength</span></div>
+        <div class="chips">
+          <span class="chip">Data collection &amp; gathering</span>
+          <span class="chip">Analysis &amp; reporting</span>
+          <span class="chip">Source verification</span>
+          <span class="chip">Confidential information handling</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tools-wrap">
+      <p class="tools-title">Tools in daily use</p>
+      <div class="tools">
+        <span class="tool">Zendesk</span>
+        <span class="tool">Discord</span>
+        <span class="tool">Google Workspace</span>
+        <span class="tool">Microsoft Office</span>
+        <span class="tool">Slack</span>
+        <span class="tool">Zoom</span>
+        <span class="tool">Notion</span>
+        <span class="tool">ChatGPT</span>
+        <span class="tool">Gemini</span>
+        <span class="tool">Perplexity</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="log">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="sec-eyebrow">Experience Log</p>
+      <h2>Where the hours went</h2>
+      <p class="sec-note">Most recent first. Tap any entry to expand what it involved.</p>
+    </div>
+
+    <div class="log">
+
+      <div class="entry">
+        <div class="entry-top">
+          <span class="entry-date">JAN 2021 — PRESENT</span>
+          <span class="entry-role">Customer Support Specialist</span>
+        </div>
+        <div class="entry-org">Valora Support Center (via Seek Customer Support) · Employee Jan 2021–Dec 2023, Independent Contractor May 2024–Present</div>
+        <details>
+          <summary>Show details</summary>
+          <ul>
+            <li>Manages day-to-day multi-channel support through Zendesk (email, chat, app reviews, social) and Discord, helping users with digital wallet transactions, account access, and technical issues.</li>
+            <li>Investigates reported issues by reviewing transaction and diagnostic data, documents findings, reproduces issues where possible, and escalates to Engineering with clear reproduction steps.</li>
+            <li>Coordinates with third-party providers to support issue resolution and operational continuity.</li>
+            <li>Moderates online communities: answering product questions, enforcing guidelines, protecting users from scams, and routing feedback to Product and Engineering.</li>
+            <li>Maintains knowledge base articles and runs QA reviews for response quality and consistency.</li>
+            <li>Uses ChatGPT, Gemini, and Perplexity for research, documentation, and drafting — with every output reviewed for accuracy.</li>
+          </ul>
+        </details>
+      </div>
+
+      <div class="entry">
+        <div class="entry-top">
+          <span class="entry-date">NOV 2020 — DEC 2020</span>
+          <span class="entry-role">Trainer</span>
+        </div>
+        <div class="entry-org">Valora Support Center (via Seek Customer Support)</div>
+        <details>
+          <summary>Show details</summary>
+          <ul>
+            <li>Onboarded new support agents with product knowledge and structured troubleshooting guidance.</li>
+            <li>Contributed to internal documentation and response guidelines to improve team-wide consistency.</li>
+          </ul>
+        </details>
+      </div>
+
+      <div class="entry">
+        <div class="entry-top">
+          <span class="entry-date">JUN 2020 — SEP 2020</span>
+          <span class="entry-role">Team Lead — Training &amp; Operations</span>
+        </div>
+        <div class="entry-org">Celo × Grameen Foundation Project (via Seek Customer Support)</div>
+        <details>
+          <summary>Show details</summary>
+          <ul>
+            <li>Supervised a frontline outbound phone support team helping beneficiaries onboard to digital wallets and receive crypto-based relief distribution.</li>
+            <li>Built task tracking, ticket handling, and escalation workflows for a newly launched remote support operation.</li>
+            <li>Coordinated with the VoIP provider to configure remote agent workstations and resolve technical issues.</li>
+            <li>Monitored live calls and ran daily calibration sessions to improve troubleshooting consistency.</li>
+            <li>Prepared daily operational reports on support volume, recurring issues, and trends for project leadership.</li>
+          </ul>
+        </details>
+      </div>
+
+      <div class="entry">
+        <div class="entry-top">
+          <span class="entry-date">2012 — 2019</span>
+          <span class="entry-role">Survey Specialist</span>
+        </div>
+        <div class="entry-org">Social Weather Stations · Full-time 2012–2015, Project-based 2016–2019</div>
+        <details>
+          <summary>Show details</summary>
+          <ul>
+            <li>Conducted quantitative and qualitative data collection, analyzed findings, and compiled results into structured reports and presentations for clients and stakeholders.</li>
+            <li>Documented formal board meeting minutes and prepared item-by-item training manuals for Training of Trainers and field interviewer programs.</li>
+            <li>Occasionally handled travel arrangements and field logistics — scheduling, participant coordination, venue reservations, and bookings.</li>
+            <li>Managed assigned research projects end-to-end, coordinating field operations, timelines, and compliance with research protocols.</li>
+          </ul>
+        </details>
+      </div>
+
+      <div class="entry">
+        <div class="entry-top">
+          <span class="entry-date">MAR — JUN 2018</span>
+          <span class="entry-role">Research Assistant</span>
+        </div>
+        <div class="entry-org">"The Philippines: What Everyone Needs to Know®" — Dr. Steven Rood</div>
+        <details>
+          <summary>Show details</summary>
+          <ul>
+            <li>Conducted desk research, verified information across multiple sources, and organized reference materials to support publication development.</li>
+          </ul>
+        </details>
+      </div>
+
+    </div>
+
+    <div class="early">
+      <div class="early-title">Early Career</div>
+      <ul>
+        <li>USA IP Relay Communication Assistant — Stellar BPO (2008–2012)</li>
+        <li>Australia Directory Assistance Operator — Stellar BPO (2010)</li>
+        <li>Customer Service Representative, American Express — C-Cubed (2005)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="sec-eyebrow">Education</p>
+      <h2>Background</h2>
+    </div>
+    <div class="edu-card">
+      <div class="edu-icon">BA</div>
+      <div>
+        <div class="edu-degree">Bachelor of Arts in Political Science</div>
+        <div class="edu-school">University of the Philippines Diliman · 2008</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="sec-eyebrow">In Her Own Words</p>
+      <h2>Why clients keep working with me</h2>
+    </div>
+    <div class="note-card">
+      <div class="note-mark">"</div>
+      <p>I think good support is about more than closing tickets — it's about making people feel taken care of. Whether I'm troubleshooting a customer's issue, drafting board minutes, or double-checking a research source, I try to bring the same care and attention to detail to all of it.</p>
+      <p>I work well independently — you won't need to check in on me constantly for things to get done. I communicate clearly, keep my documentation clean, and treat sensitive information the way I'd want mine treated. My goal is simple: make things easier for you and for the people you're serving.</p>
+      <div class="note-sign">
+        <span class="sig">Leah</span>
+        <span>· Remote Customer Support Specialist &amp; Virtual Assistant</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div>
+      <p class="sec-eyebrow">Open a Ticket</p>
+      <h2>Let's talk about the work</h2>
+      <p class="sec-note">Tell me a bit about what you need help with — I'd love to hear about it. I typically reply within a few hours during Pacific working hours.</p>
+    </div>
+    <div class="foot-cta">
+      <div class="foot-field">Email<b>leah.aldave.va@gmail.com</b></div>
+      <div class="foot-field">Location<b>Philippines (UTC+08:00)</b></div>
+      <div class="foot-field">Availability<b>Remote, Pacific Time hours</b></div>
+      <a class="btn btn-primary" href="mailto:leah.aldave.va@gmail.com" style="margin-top:6px; align-self:flex-start;">Email Leah →</a>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">
+    <span>Ma. Leah Czarina C. Aldave — Portfolio</span>
+    <span>Last updated July 2026</span>
+  </div>
+</footer>
+
+<script>
+  function pad(n){return n.toString().padStart(2,'0');}
+  function updateClocks(){
+    const now = new Date();
+    const phFmt = new Intl.DateTimeFormat('en-US', {timeZone:'Asia/Manila', hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:true});
+    const ptFmt = new Intl.DateTimeFormat('en-US', {timeZone:'America/Los_Angeles', hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:true});
+    const phEl = document.getElementById('clock-ph');
+    const ptEl = document.getElementById('clock-pt');
+    if(phEl) phEl.textContent = phFmt.format(now);
+    if(ptEl) ptEl.textContent = ptFmt.format(now);
+  }
+  updateClocks();
+  setInterval(updateClocks, 1000);
+</script>
+
+</body>
+</html>
